@@ -1,9 +1,9 @@
 import React from "react";
-export default function todoItem({ todo, removeTask }) {
+export default function todoItem({ todo, removerTarefa }) {
   return (
     <li>
       {todo.date} -- {todo.hora} -- {todo.text}
-      <button style={styles.button} onClick={() => removeTask(todo.id)}>X</button>
+      <button style={styles.button} onClick={() => removerTarefa(todo.id)}>X</button>
     </li>
   );
 }
