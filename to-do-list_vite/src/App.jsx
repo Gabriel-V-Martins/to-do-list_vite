@@ -45,7 +45,7 @@ function App() {
           Adicionar
         </button>
         <button onClick={verLista} style={styles.button}>
-          {visivel ? "Mostrar" : "Ocultar"}
+          {visivel ? "Ocultar" : "Mostrar"}
         </button>
       </div>
     </div>
