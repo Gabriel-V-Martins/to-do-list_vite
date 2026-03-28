@@ -48,6 +48,31 @@ function App() {
           {visivel ? "Ocultar" : "Mostrar"}
         </button>
       </div>
+      <div marginTop="20">
+        <input
+          type="time"
+          value={hora}
+          onChange={(e) => setHora(e.target.value)}
+          style={styles.inputADataHora}
+        />
+        <input
+          type="date"
+          value={dataDia}
+          onChange={(e) => setDataDia(e.target.value)}
+          style={styles.inputDataHora}
+        />
+        <div
+          style={{
+            height: "500px",
+            overflowY: "scroll",
+            border: "1px solid #ccc",
+            padding: "10px",
+            marginTop: "20px",
+          }}
+        >
+          {visivel && <TodoList todos={todos} removerTarefa={removerTarefa} />}
+        </div>
+      </div>
     </div>
   );
 }
