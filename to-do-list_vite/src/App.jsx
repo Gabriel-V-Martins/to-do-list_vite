@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import TodoList from "./todoList";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const tarefas = localStorage.getItem("tarefas");
+    return tarefas ? JSON.parse(tarefas) : [];
+  });
   const [visivel, setVisivel] = useState(true);
   const [novaTarefa, setNovaTarefa] = useState("");
   const [dataDia, setDataDia] = useState("");
-  const [hora, setDataHora] = useState("");
+  const [hora, setHora] = useState("");
 
   const addTarefa = () => {
-    if (novaTarefa.trim() === "") return;
+    if (
+      novaTarefa.trim() === "" ||
+      dataDia.trim() === "" ||
+      hora.trim() === ""
+    ) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
     const novoTodo = {
       id: Date.now(),
       text: novaTarefa,
@@ -19,7 +29,7 @@ function App() {
     setTodos([...todos, novoTodo]);
     setNovaTarefa("");
     setDataDia("");
-    setDataHora("");
+    setHora("");
   };
 
   const removerTarefa = (id) => {
@@ -29,6 +39,10 @@ function App() {
   const verLista = () => {
     setVisivel(!visivel);
   };
+
+  useEffect(() => {
+    localStorage.setItem("tarefas", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div style={styles.container}>
