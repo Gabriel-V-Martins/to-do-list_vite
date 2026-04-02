@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import TodoList from "./todoList";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
   const [novaTarefa, setNovaTarefa] = useState("");
   const [dataDia, setDataDia] = useState("");
   const [hora, setHora] = useState("");
+  const [busca, setBusca] = useState([]);
 
   const addTarefa = () => {
     if (
@@ -31,7 +32,7 @@ function App() {
     setDataDia("");
     setHora("");
   };
-
+  
   const removerTarefa = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -43,6 +44,15 @@ function App() {
   useEffect(() => {
     localStorage.setItem("tarefas", JSON.stringify(todos));
   }, [todos]);
+
+  
+
+  // console.log(todos)
+  // const mapTodos = todosFiltrados.map((todo) => (
+  //   <TodoList key={todo.id} todo={todo} removerTarefa={removerTarefa} />
+  // ));
+
+  // useEffect(() => {}, [busca]);
 
   return (
     <div style={styles.container}>
@@ -75,6 +85,13 @@ function App() {
           onChange={(e) => setDataDia(e.target.value)}
           style={styles.inputDataHora}
         />
+        <input
+          type="text"
+          placeholder="Bucar tarefa"
+          value={busca}
+          onChange={(ev) => setBusca(ev.target.value)}
+        />
+
         <div
           style={{
             height: "500px",
