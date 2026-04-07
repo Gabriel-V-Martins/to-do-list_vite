@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import TodoList from "./todoList";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
     setDataDia("");
     setHora("");
   };
-  
+
   const removerTarefa = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -45,14 +45,19 @@ function App() {
     localStorage.setItem("tarefas", JSON.stringify(todos));
   }, [todos]);
 
+  //const mapTodos = todos.map((todo) => todo.text);
+
+  const todosFiltrado = useMemo(() => {
+    
+    todos.filter((todoFiltrado) => {
+      todoFiltrado.text.toLowerCase().includes(busca);
+  });
+  return todos;
+  }, [busca]);
   
-
-  // console.log(todos)
-  // const mapTodos = todosFiltrados.map((todo) => (
-  //   <TodoList key={todo.id} todo={todo} removerTarefa={removerTarefa} />
-  // ));
-
-  // useEffect(() => {}, [busca]);
+  // useEffect(() => {
+  //   setTodos(todosFiltrado);
+  // }, [busca])
 
   return (
     <div style={styles.container}>
@@ -101,7 +106,7 @@ function App() {
             marginTop: "20px",
           }}
         >
-          {visivel && <TodoList todos={todos} removerTarefa={removerTarefa} />}
+          {visivel && <TodoList todos={todosFiltrado} removerTarefa={removerTarefa} />}
         </div>
       </div>
     </div>
