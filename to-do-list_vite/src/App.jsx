@@ -10,7 +10,7 @@ function App() {
   const [novaTarefa, setNovaTarefa] = useState("");
   const [dataDia, setDataDia] = useState("");
   const [hora, setHora] = useState("");
-  const [busca, setBusca] = useState([]);
+  const [busca, setBusca] = useState("");
 
   const addTarefa = () => {
     if (
@@ -45,19 +45,14 @@ function App() {
     localStorage.setItem("tarefas", JSON.stringify(todos));
   }, [todos]);
 
-  //const mapTodos = todos.map((todo) => todo.text);
+  const mapTodos = todos.map((todo) => todo);
 
-  const todosFiltrado = useMemo(() => {
-    
-    todos.filter((todoFiltrado) => {
+  const todosFiltrados = useMemo(() => {
+    mapTodos.filter((todoFiltrado) => {
       todoFiltrado.text.toLowerCase().includes(busca);
   });
-  return todos;
-  }, [busca]);
-  
-  // useEffect(() => {
-  //   setTodos(todosFiltrado);
-  // }, [busca])
+  return mapTodos;
+  }, [busca, mapTodos]);
 
   return (
     <div style={styles.container}>
@@ -94,7 +89,7 @@ function App() {
           type="text"
           placeholder="Bucar tarefa"
           value={busca}
-          onChange={(ev) => setBusca(ev.target.value)}
+          onChange={(e) => setBusca(e.target.value)}
         />
 
         <div
@@ -106,7 +101,7 @@ function App() {
             marginTop: "20px",
           }}
         >
-          {visivel && <TodoList todos={todosFiltrado} removerTarefa={removerTarefa} />}
+          {visivel && <TodoList todos={todosFiltrados} removerTarefa={removerTarefa} />}
         </div>
       </div>
     </div>
