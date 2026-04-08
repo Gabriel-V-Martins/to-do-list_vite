@@ -48,10 +48,10 @@ function App() {
   const mapTodos = todos.map((todo) => todo);
 
   const todosFiltrados = useMemo(() => {
-    mapTodos.filter((todoFiltrado) => {
-      todoFiltrado.text.toLowerCase().includes(busca);
-  });
-  return mapTodos;
+    mapTodos.filter((todoFiltrado) => 
+      todoFiltrado.text.toLowerCase().includes(busca)
+  );
+  console.log("mapTodos: ", mapTodos);
   }, [busca, mapTodos]);
 
   return (
