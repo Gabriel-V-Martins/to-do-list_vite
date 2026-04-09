@@ -45,14 +45,11 @@ function App() {
     localStorage.setItem("tarefas", JSON.stringify(todos));
   }, [todos]);
 
-  const mapTodos = todos.map((todo) => todo);
-
   const todosFiltrados = useMemo(() => {
-    mapTodos.filter((todoFiltrado) => 
-      todoFiltrado.text.toLowerCase().includes(busca)
-  );
-  console.log("mapTodos: ", mapTodos);
-  }, [busca, mapTodos]);
+    return todos.filter((todoFiltrado) =>
+      todoFiltrado.text.toLowerCase().includes(busca),
+    );
+  }, [busca, todos]);
 
   return (
     <div style={styles.container}>
@@ -101,7 +98,9 @@ function App() {
             marginTop: "20px",
           }}
         >
-          {visivel && <TodoList todos={todosFiltrados} removerTarefa={removerTarefa} />}
+          {visivel && (
+            <TodoList todos={todosFiltrados} removerTarefa={removerTarefa} />
+          )}
         </div>
       </div>
     </div>
