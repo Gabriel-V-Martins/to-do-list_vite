@@ -52,61 +52,80 @@ function App() {
   }, [busca, todos]);
 
   return (
-    <div style={styles.container}>
-      <h1>Lista de tarefas</h1>
       <div style={styles.container}>
-        <input
-          type="text"
-          placeholder="Nova Tarefa"
-          value={novaTarefa}
-          onChange={(e) => setNovaTarefa(e.target.value)}
-          style={styles.input}
-        />
-        <button onClick={addTarefa} style={styles.button}>
-          Adicionar
-        </button>
-        <button onClick={verLista} style={styles.button}>
-          {visivel ? "Ocultar" : "Mostrar"}
-        </button>
-      </div>
-      <div marginTop="20">
-        <input
-          type="time"
-          value={hora}
-          onChange={(e) => setHora(e.target.value)}
-          style={styles.inputADataHora}
-        />
-        <input
-          type="date"
-          value={dataDia}
-          onChange={(e) => setDataDia(e.target.value)}
-          style={styles.inputDataHora}
-        />
-        <input
-          type="text"
-          placeholder="Bucar tarefa"
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-        />
+        <h1>Lista de tarefas</h1>
+        <div style={styles.container}>
+          <input
+            type="text"
+            placeholder="Nova Tarefa"
+            value={novaTarefa}
+            onChange={(e) => setNovaTarefa(e.target.value)}
+            style={styles.input}
+          />
+          <button onClick={addTarefa} style={styles.button}>
+            Adicionar
+          </button>
+          <button onClick={verLista} style={styles.button}>
+            {visivel ? "Ocultar" : "Mostrar"}
+          </button>
+        </div>
+        <div marginTop="20">
+          <input
+            type="time"
+            value={hora}
+            onChange={(e) => setHora(e.target.value)}
+            style={styles.inputDataHora}
+          />
+          <input
+            type="date"
+            value={dataDia}
+            onChange={(e) => setDataDia(e.target.value)}
+            style={styles.inputDataHora}
+          />
+          <input
+            type="text"
+            placeholder="Bucar tarefa"
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+          />
 
-        <div
-          style={{
-            height: "500px",
-            overflowY: "scroll",
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginTop: "20px",
-          }}
-        >
-          {visivel && (
-            <TodoList todos={todosFiltrados} removerTarefa={removerTarefa} />
-          )}
+          <div
+            style={{
+              height: "500px",
+              overflowY: "scroll",
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginTop: "20px"
+            }}
+          >
+            {visivel && (
+              <TodoList todos={todosFiltrados} removerTarefa={removerTarefa} />
+            )}
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 const styles = {
-  container: {},
+  container: {
+    maxWidth: "600px",
+    textAlign: "center",
+    fontFamily: "Arial, sans-serif",
+  },
+  inputDataHora: {
+    padding: "10px",
+    width: "39%",
+    marginRight: "5px",
+    borderRadius: "10px",
+  },
+  input: {
+    padding: "10px",
+    width: "70%",
+    marginRight: "5px",
+  },
+  button: {
+    padding: "10px",
+    cursor: "pointer",
+  },
 };
 export default App;
